@@ -1,0 +1,50 @@
+# Ignorar archivos de configuración del entorno
+.env
+.env.local
+.env.*.local
+
+# Ignorar archivos de log
+*.log
+logs/
+*.log.*
+npm-debug.log*
+
+# Ignorar carpetas de sesiones y almacenamiento temporal
+storage/
+session/
+tmp/
+cache/
+
+# Ignorar archivos y carpetas de base de datos local
+*.sql
+*.sqlite
+
+# Ignorar dependencias
+/vendor/
+node_modules/
+
+# Ignorar directorios de XAMPP o similares
+xampp/
+.htaccess
+.DS_Store
+
+# Ignorar configuraciones de IDEs y editores
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Ignorar archivos de sistema
+Thumbs.db
+Desktop.ini
+
+# Ignorar archivos de compilación y test
+/tests/
+phpunit.xml
+phpunit.xml.dist
+
+# Ignorar archivos de scripts de prueba
+probar_conexion.php
+
+# Ignorar configuraciones locales
+configuracion_app.php
