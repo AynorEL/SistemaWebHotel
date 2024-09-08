@@ -1,1 +1,4 @@
-// Vista para listar usuarios 
+<?php
+header('Location: listado.php');
+exit;
+?>
