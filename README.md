@@ -2,6 +2,10 @@
 
 Este es un sistema de gestión hotelera desarrollado en PHP con Bootstrap, utilizando una arquitectura MVC (Modelo-Vista-Controlador). El sistema permite gestionar reservas, clientes, habitaciones, pagos y generar reportes.
 
+![Vista del Dashboard](public/img/index.png)
+![Vista del Usurio](public/img/usuarios.png)
+
+
 ## Tabla de Contenidos
 1. [Descripción General](#descripción-general)
 2. [Requisitos](#requisitos)
