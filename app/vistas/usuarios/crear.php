@@ -20,15 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $rol = $_POST['rolUsuario'] ?? null;
     $dni = $_POST['dniUsuario'] ?? null;
     $estado = $_POST['estadoUsuario'] ?? null;
-
     // Validar que todos los campos estén presentes
     if ($usuario && $password && $rol && $dni && $estado) {
         // Encriptar la contraseña con password_hash (mejor que MD5)
         $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
-
         // Intentar crear el usuario
         $resultado = $usuarioControlador->crearUsuario($usuario, $passwordHashed, $rol, $dni, $estado);
-
         // Verificar si se creó correctamente
         if ($resultado) {
             echo json_encode([

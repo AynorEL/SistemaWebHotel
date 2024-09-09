@@ -25,8 +25,8 @@
         <i class="fas fa-money-check-alt"></i> Pagos
     </a>
     <div id="pagosSubmenu" class="collapse ps-3">
-        <a href="../pagos/listado.php" class="text-white d-block py-2 ajax-link">Listado de Pagos</a>
-        <a href="../pagos/nuevo.php" class="text-white d-block py-2 ajax-link">Añadir Pago</a>
+        <a href="/SistemaWebHotel/app/vistas/pagos/index.php" class="text-white d-block py-2 ajax-link">Listado de Pagos</a>
+        <a href="/SistemaWebHotel/app/vistas/pagos/crearpago.php" class="text-white d-block py-2 ajax-link">Añadir Pago</a>
     </div>
 
     <!-- Submenú de Usuarios -->

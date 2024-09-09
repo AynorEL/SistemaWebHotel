@@ -212,12 +212,10 @@ $(document).ready(function() {
         });
     });
 });
-
 // Confirmación personalizada para cambiar el estado
 function confirmarEstado() {
     return confirm('¿Estás seguro de cambiar el estado?');
 }
 </script>
-
 </body>
 </html>
