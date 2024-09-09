@@ -4,8 +4,10 @@ require __DIR__ . '/../../middlewares/autenticacionMiddleware.php';
 // Incluir la barra lateral
 require __DIR__ . '/../../parciales/barra_lateral.php';
 // Incluir la conexión a la base de datos
- require '../configuracion/base_datos.php';
+require '../configuracion/base_datos.php';
 
+// Título específico para esta página
+$tituloPagina = "Dashboard";
 
 // Obtener el número de habitaciones ocupadas
 $sqlHabitacionesOcupadas = "SELECT COUNT(*) as ocupadas FROM habitaciones WHERE fk_id_estado_habitacion = 3";
@@ -27,7 +29,7 @@ $reservasPendientes = $resultReservasPendientes->fetch_assoc()['pendientes'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Hotelero - Dashboard</title>
+    <title>Sistema Hotelero - <?php echo $tituloPagina; ?></title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome para los iconos -->
@@ -39,20 +41,19 @@ $reservasPendientes = $resultReservasPendientes->fetch_assoc()['pendientes'];
 </head>
 <body>
 <div class="header">
-        <h4>Bienvenido, <?php echo $_SESSION['usuario']; ?></h4>
-        <div class="user-info">
-            <img src="https://via.placeholder.com/50" alt="Usuario">
-            <span><?php echo $_SESSION['usuario']; ?></span> <!-- Mostrar el nombre real del usuario -->
-        </div>
+    <h4><?php echo $tituloPagina; ?></h4> <!-- Cambiar el título aquí -->
+    <div class="user-info">
+        <img src="https://via.placeholder.com/50" alt="Usuario">
+        <span><?php echo $_SESSION['usuario']; ?></span> <!-- Mostrar el nombre real del usuario -->
     </div>
-<!-- Sidebar (Solo uno) -->
+</div>
+
+<!-- Sidebar -->
 <?php require __DIR__ . '/../../parciales/barra_lateral.php'; ?>
 
-
-<!-- Contenedor dinámico -->
+<!-- Contenido dinámico -->
 <div id="content" class="main-content">
-    <!-- Aquí se cargará el contenido dinámico (por defecto muestra el dashboard) -->
-    <h1>Bienvenido al Dashboard</h1>
+    <h1><?php echo $tituloPagina; ?></h1> <!-- Cambiar el título también aquí -->
     <p>Tu última sesión fue hace 21 horas desde Perú.</p>
 
     <div class="row">
@@ -60,7 +61,7 @@ $reservasPendientes = $resultReservasPendientes->fetch_assoc()['pendientes'];
             <div class="card text-white bg-primary mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Habitaciones Ocupadas</h5>
-                    <p class="card-text">3</p>
+                    <p class="card-text"><?php echo $habitacionesOcupadas; ?></p>
                 </div>
             </div>
         </div>
@@ -68,7 +69,7 @@ $reservasPendientes = $resultReservasPendientes->fetch_assoc()['pendientes'];
             <div class="card text-white bg-success mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Ingresos Hoy</h5>
-                    <p class="card-text">S/ 0.00</p>
+                    <p class="card-text">S/ <?php echo number_format($ingresosHoy, 2); ?></p>
                 </div>
             </div>
         </div>
@@ -76,7 +77,7 @@ $reservasPendientes = $resultReservasPendientes->fetch_assoc()['pendientes'];
             <div class="card text-white bg-danger mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Reservas Pendientes</h5>
-                    <p class="card-text">0</p>
+                    <p class="card-text"><?php echo $reservasPendientes; ?></p>
                 </div>
             </div>
         </div>
@@ -106,6 +107,7 @@ $reservasPendientes = $resultReservasPendientes->fetch_assoc()['pendientes'];
         loadContent(page);  // Cargar el contenido de la URL en el contenedor #content
     });
 </script>
+
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
