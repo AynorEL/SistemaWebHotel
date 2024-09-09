@@ -147,6 +147,8 @@ $tituloPagina = "Usuarios";
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js" defer></script>
 <!-- FontAwesome para los iconos -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" defer></script>
+<!-- SweetAlert2 para notificaciones -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Script para activar DataTables -->
 <script>
@@ -172,7 +174,7 @@ $(document).ready(function() {
         }
     });
 
-    // Función para enviar el formulario usando AJAX
+    // Función para enviar el formulario usando AJAX y mostrar notificación personalizada
     $('#crearUsuarioBtn').click(function(e) {
         e.preventDefault();
         var formData = $('#formAgregarUsuario').serialize(); // Recopila los datos del formulario
@@ -183,9 +185,13 @@ $(document).ready(function() {
             data: formData,
             dataType: 'json',
             success: function(response) {
-                console.log(response); // Verifica en consola la respuesta
                 if (response.status === 'success') {
-                    alert(response.message);
+                    Swal.fire({
+                        title: 'Usuario Creado',
+                        text: response.message,
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
                     $('#modalAgregarUsuario').modal('hide');
                     var nuevoUsuario = `
                         <tr>
@@ -202,19 +208,41 @@ $(document).ready(function() {
                     `;
                     $('#tablaUsuarios tbody').append(nuevoUsuario);
                 } else {
-                    alert(response.message);
+                    Swal.fire({
+                        title: 'Error',
+                        text: response.message,
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
             },
             error: function(xhr, status, error) {
                 console.error('Error al crear el usuario:', error); // Verifica detalles del error
-                alert('Error al crear el usuario listado.');
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un problema al crear el usuario.',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
             }
         });
     });
 });
+
 // Confirmación personalizada para cambiar el estado
 function confirmarEstado() {
-    return confirm('¿Estás seguro de cambiar el estado?');
+    return Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Estás a punto de cambiar el estado del usuario.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, cambiar estado',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        return result.isConfirmed;
+    });
 }
 </script>
 </body>

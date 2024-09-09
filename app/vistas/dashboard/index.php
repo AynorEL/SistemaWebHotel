@@ -7,7 +7,7 @@ require __DIR__ . '/../../parciales/barra_lateral.php';
 require '../configuracion/base_datos.php';
 
 // Título específico para esta página
-$tituloPagina = "Dashboard";
+$tituloPagina = "SISTEMA HOTEL";
 
 // Obtener el número de habitaciones ocupadas
 $sqlHabitacionesOcupadas = "SELECT COUNT(*) as ocupadas FROM habitaciones WHERE fk_id_estado_habitacion = 3";

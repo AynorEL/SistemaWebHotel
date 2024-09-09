@@ -1,5 +1,5 @@
 <div class="sidebar bg-primary vh-100">
-    <h2 class="text-white">Sistema Hotelero</h2>
+    <h2 class="text-white">Menu</h2>
     <a href="dashboard.php" class="text-white d-block py-2 ajax-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
 
     <!-- Submenú de Habitaciones -->
