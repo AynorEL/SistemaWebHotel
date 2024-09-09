@@ -1,5 +1,5 @@
 <?php
-//aynor
+// Prueba de actualización - Aynor
 header('Location: listado.php');
 exit;
 ?>
