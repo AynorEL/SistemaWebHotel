@@ -32,7 +32,7 @@ El **SistemaWebHotel** permite a los administradores gestionar las actividades d
 
 1. Clona el repositorio en tu servidor local:
     ```bash
-    git clone https://github.com/usuario/SistemaWebHotel.git
+    git clone https://github.com/AynorEL/SistemaWebHotel.git
     ```
 
 2. Configura la base de datos:
