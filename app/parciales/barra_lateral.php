@@ -7,7 +7,7 @@
         <i class="fas fa-bed"></i> Habitaciones
     </a>
     <div id="habitacionesSubmenu" class="collapse ps-3">
-        <a href="../habitaciones/listado.php" class="text-white d-block py-2 ajax-link">Listado de Habitaciones</a>
+        <a href="/SistemaWebHotel/app/vistas/habitaciones/listado.php" class="text-white d-block py-2 ajax-link">Listado de Habitaciones</a>
         <a href="../habitaciones/nueva.php" class="text-white d-block py-2 ajax-link">Añadir Habitación</a>
     </div>
 
@@ -16,7 +16,7 @@
         <i class="fas fa-calendar-alt"></i> Reservas
     </a>
     <div id="reservasSubmenu" class="collapse ps-3">
-        <a href="../reservas/listado.php" class="text-white d-block py-2 ajax-link">Todas las Reservas</a>
+        <a href="/SistemaWebHotel/app/vistas/reservas/listado.php" class="text-white d-block py-2 ajax-link">Todas las Reservas</a>
         <a href="../reservas/nueva.php" class="text-white d-block py-2 ajax-link">Crear Reserva</a>
     </div>
 
