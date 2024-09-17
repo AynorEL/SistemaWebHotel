@@ -51,18 +51,19 @@ $tituloPagina = "Usuarios";
                 <th>Dirección</th>
                 <th>Celular</th>
                 <th>Acciones</th>
+                    <th>celular</th>
+                    <th>Direccion</th>
+
             </tr>
         </thead>
         <tbody>
             <?php foreach ($usuarios as $usuario): ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($usuario['id_usuario'], ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo htmlspecialchars($usuario['NOMBRES'], ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo htmlspecialchars($usuario['usuario'], ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo htmlspecialchars($usuario['cargo'], ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo htmlspecialchars($usuario['dni'], ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo htmlspecialchars($usuario['dirección'], ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo htmlspecialchars($usuario['celular'], ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php echo $usuario['id_usuario']; ?></td>
+                    <td><?php echo $usuario['usuario']; ?></td>
+                    <td><?php echo $usuario['fk_idrol']; ?></td>
+                    <td><?php echo $usuario['fk_dni']; ?></td>
+                    <td><?php echo $usuario['fk_id_estado'] == 1 ? 'Activo' : 'Oculto'; ?></td>
                     <td>
                         <button type="button" class="btn btn-warning btn-sm editarUsuario" data-id="<?php echo htmlspecialchars($usuario['id_usuario'], ENT_QUOTES, 'UTF-8'); ?>">
                             <i class="fas fa-edit"></i> Editar
