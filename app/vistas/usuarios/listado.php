@@ -67,6 +67,9 @@ $tituloPagina = "Usuarios";
                 <th>DNI</th>
                 <th>Estado</th>
                 <th>Acciones</th>
+                    <th>celular</th>
+                    <th>Direccion</th>
+
             </tr>
         </thead>
         <tbody>
@@ -76,6 +79,9 @@ $tituloPagina = "Usuarios";
                     <td><?php echo $usuario['usuario']; ?></td>
                     <td><?php echo $usuario['fk_idrol']; ?></td>
                     <td><?php echo $usuario['fk_dni']; ?></td>
+                        <td><?php echo $usuario['fk_celular']; ?></td>
+                        <td><?php echo $usuario['fk_Direccion']; ?></td>
+
                     <td><?php echo $usuario['fk_id_estado'] == 1 ? 'Activo' : 'Oculto'; ?></td>
                     <td>
                         <a href="editar.php?id=<?php echo $usuario['id_usuario']; ?>" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Editar</a>
