@@ -1,4 +1,3 @@
-php
 <?php
 // Incluir el controlador de reservas
 require __DIR__ . '/../../controladores/ReservaControlador.php';

@@ -1,7 +1,6 @@
 <?php
 header('Content-Type: application/json; charset=UTF-8');
 require __DIR__ . '/../../controladores/UsuarioControlador.php';
-
 // Verificar conexión a la base de datos
 if ($conn->connect_error) {
     die(json_encode([

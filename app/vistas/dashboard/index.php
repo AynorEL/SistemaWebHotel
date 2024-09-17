@@ -41,7 +41,7 @@ $reservasPendientes = $resultReservasPendientes->fetch_assoc()['pendientes'];
 </head>
 <body>
 <div class="header">
-    <h4><?php echo $tituloPagina; ?></h4> <!-- Cambiar el título aquí -->
+    <h4><?php echo $tituloPagina; ?></h4> 
     <div class="user-info">
         <img src="https://via.placeholder.com/50" alt="Usuario">
         <span><?php echo $_SESSION['usuario']; ?></span> <!-- Mostrar el nombre real del usuario -->
