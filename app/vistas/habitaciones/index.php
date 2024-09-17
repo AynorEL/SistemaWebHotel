@@ -1,1 +1,4 @@
-// Vista para listar habitaciones 
+<?php
+header('Location: listado.php');
+exit;
+?>
