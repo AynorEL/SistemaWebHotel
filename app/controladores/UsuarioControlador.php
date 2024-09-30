@@ -11,19 +11,11 @@ class UsuarioControlador {
 
     // Obtener todos los usuarios activos con dirección
     public function obtenerUsuarios() {
-        $sql = "SELECT 
-                u.id_usuario,
-                CONCAT_WS(' ', p.nombres, p.apellidos) AS NOMBRES,
-                p.dirección, 
-                p.correo, 
-                u.usuario, 
-                p.dni,
-                p.celular, 
-                r.cargo 
-            FROM usuarios u
-            INNER JOIN personas p ON u.fk_dni = p.dni
-            INNER JOIN roles r ON u.fk_idrol = r.id_rol
-            WHERE u.fk_id_estado = 1";  // Solo usuarios activos
+        $sql = "SELECT u.id_usuario,concat_ws(' ',p.nombres,p.apellidos) as NOMBRES, p.dirección,
+        p.correo,u.usuario,p.celular,r.cargo FROM usuarios u 
+INNER JOIN personas p ON u.fk_dni=p.dni
+INNER JOIN roles r ON u.fk_idrol=r.id_rol
+WHERE u.fk_id_estado=1";  // Solo usuarios activos
         $result = $this->db->query($sql);
 
         if (!$result) {
