@@ -34,7 +34,7 @@
         <i class="fas fa-users"></i> Usuarios
     </a>
     <div id="usuariosSubmenu" class="collapse ps-3">
-    <a href="/SistemaWebHotel/app/vistas/usuarios/listado.php" class="text-white d-block py-2 ajax-link">Usuarios</a>
+    <a href="/SistemaWebHotel/app/vistas/usuarios/index.php" class="text-white d-block py-2 ajax-link">Usuarios</a>
         <a href="../usuarios/nuevo.php" class="text-white d-block py-2 ajax-link">Añadir Usuario</a>
     </div>
 

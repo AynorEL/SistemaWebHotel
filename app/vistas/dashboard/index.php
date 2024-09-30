@@ -10,9 +10,9 @@ require '../configuracion/base_datos.php';
 $tituloPagina = "SISTEMA HOTEL";
 
 // Obtener el número de habitaciones ocupadas
-$sqlHabitacionesOcupadas = "SELECT COUNT(*) as ocupadas FROM habitaciones WHERE fk_id_estado_habitacion = 3";
+$sqlHabitacionesOcupadas = "SELECT COUNT(*) as ocupadas FROM habitaciones WHERE fk_id_estado_habitacion = 2"; // Cambiado a 2 para reflejar 'Ocupada'
 $resultHabitacionesOcupadas = $conn->query($sqlHabitacionesOcupadas);
-$habitacionesOcupadas = $resultHabitacionesOcupadas->fetch_assoc()['ocupadas'];
+$habitacionesOcupadas = $resultHabitacionesOcupadas->fetch_assoc()['ocupadas'] ?? 0; // Manejo de posibles errores
 
 // Obtener los ingresos del día
 $sqlIngresosHoy = "SELECT SUM(monto) as ingresos FROM detalle_pago WHERE DATE(fecha_pago) = CURDATE()";
@@ -20,9 +20,9 @@ $resultIngresosHoy = $conn->query($sqlIngresosHoy);
 $ingresosHoy = $resultIngresosHoy->fetch_assoc()['ingresos'] ?? 0;
 
 // Obtener el número de reservas pendientes
-$sqlReservasPendientes = "SELECT COUNT(*) as pendientes FROM reservas WHERE fecha_salida >= CURDATE()";
+$sqlReservasPendientes = "SELECT COUNT(*) as pendientes FROM reservas WHERE fecha_salida >= CURDATE() AND fk_id_estados_reserva = 1"; // Asegúrate de que el estado 1 sea 'Pendiente'
 $resultReservasPendientes = $conn->query($sqlReservasPendientes);
-$reservasPendientes = $resultReservasPendientes->fetch_assoc()['pendientes'];
+$reservasPendientes = $resultReservasPendientes->fetch_assoc()['pendientes'] ?? 0; // Manejo de posibles errores
 ?>
 <!DOCTYPE html>
 <html lang="es">
