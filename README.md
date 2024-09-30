@@ -45,4 +45,4 @@ El **SistemaWebHotel** permite a los administradores gestionar las actividades d
     ```bash
     http://localhost/SistemaWebHotel/public
     ```
-
+<script src="http://localhost/SistemaWebHotel/public/js/scripts.js"></script>
