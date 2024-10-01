@@ -11,11 +11,13 @@ class UsuarioControlador {
 
     // Listar usuarios activos
     public function listarUsuarios() {
-        $sql = "SELECT u.id_usuario, CONCAT_WS(' ', p.nombres, p.apellidos) AS nombres, p.direccion, p.correo, u.usuario, p.celular, r.cargo 
-                FROM usuarios u 
-                INNER JOIN personas p ON u.fk_dni = p.dni
-                INNER JOIN roles r ON u.fk_idrol = r.id_rol
-                WHERE u.fk_id_estado = 1";
+        $sql = "SELECT u.id_usuario, CONCAT_WS(' ', p.nombres, p.apellidos) AS nombres, p.direccion, p.correo, u.usuario, p.celular, r.cargo
+FROM usuarios u
+INNER JOIN personas p ON u.fk_dni = p.dni
+INNER JOIN roles r ON u.fk_idrol = r.id_rol
+WHERE u.fk_id_estado = 1
+ORDER BY u.id_usuario;
+";
         $result = $this->conexion->query($sql);
         return $result;
     }
