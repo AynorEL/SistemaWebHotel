@@ -69,6 +69,9 @@ SISTEMA_WEB_HOTEL/
 │   │   ├── dashboard/         # Vistas del panel de control
 │   │   │   └── index.php
 │   │   ├── habitaciones/      # Vistas para gestión de habitaciones
+│   │       ├── actualizar.php
+│   │       ├── crear.php
+│   │       └── index.php
 │   │   ├── layouts/           # Posiblemente plantillas comunes para todas las páginas
 │   │   ├── pagos/             # Vistas para la gestión de pagos
 │   │   ├── reservas/          # Vistas para la gestión de reservas

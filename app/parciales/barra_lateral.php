@@ -7,7 +7,7 @@
         <i class="fas fa-bed"></i> Habitaciones
     </a>
     <div id="habitacionesSubmenu" class="collapse ps-3">
-        <a href="/SistemaWebHotel/app/vistas/habitaciones/listado.php" class="text-white d-block py-2 ajax-link">Listado de Habitaciones</a>
+        <a href="/SistemaWebHotel/app/vistas/habitaciones/index.php" class="text-white d-block py-2 ajax-link">Listado de Habitaciones</a>
         <a href="../habitaciones/nueva.php" class="text-white d-block py-2 ajax-link">Añadir Habitación</a>
     </div>
 
