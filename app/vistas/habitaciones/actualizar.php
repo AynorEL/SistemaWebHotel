@@ -1,5 +1,5 @@
 <?php
-// Aquí asumimos que la información de la habitación ya fue cargada en $habitacion
+
 ?>
 
 <form id="formActualizarHabitacion" method="POST">
@@ -11,17 +11,20 @@
     </div>
     <div class="modal-body">
         <input type="hidden" name="id_habitacion" value="<?= $habitacion['id_habitacion'] ?>">
+
         <div class="form-group">
-            <label for="numero_habitacion">Número de la Habitación</label>
-            <input type="number" class="form-control" name="numero" id="numero_habitacion" value="<?= $habitacion['numero_habitacion'] ?>" required>
+            <input type="number" class="form-control" name="numero" id="numero_habitacion" 
+                   value="<?= $habitacion['numero_habitacion'] ?>" placeholder="Número de la Habitación" required>
         </div>
+
         <div class="form-group">
-            <label for="descripcion">Descripción</label>
-            <textarea class="form-control" name="descripcion" id="descripcion" required><?= $habitacion['descripcion'] ?></textarea>
+            <textarea class="form-control" name="descripcion" id="descripcion" 
+                      placeholder="Descripción" required><?= $habitacion['descripcion'] ?></textarea>
         </div>
+
         <div class="form-group">
-            <label for="fk_tipo">Tipo de Habitación</label>
             <select class="form-control" name="fk_tipo" id="fk_tipo" required>
+                <option value="" disabled>Seleccionar Tipo de Habitación</option>
                 <?php foreach ($tipos_habitacion as $tipo): ?>
                     <option value="<?= $tipo['id_tipo'] ?>" <?= $tipo['id_tipo'] == $habitacion['fk_id_tipo'] ? 'selected' : '' ?>>
                         <?= $tipo['nom_tipo'] ?>
@@ -29,9 +32,10 @@
                 <?php endforeach; ?>
             </select>
         </div>
+
         <div class="form-group">
-            <label for="fk_estado">Estado de la Habitación</label>
             <select class="form-control" name="fk_estado" id="fk_estado" required>
+                <option value="" disabled>Seleccionar Estado de la Habitación</option>
                 <?php foreach ($estados_habitacion as $estado): ?>
                     <option value="<?= $estado['id_estado_habitacion'] ?>" <?= $estado['id_estado_habitacion'] == $habitacion['fk_id_estado_habitacion'] ? 'selected' : '' ?>>
                         <?= $estado['nombre_estado'] ?>
@@ -45,4 +49,5 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
     </div>
 </form>
+
 

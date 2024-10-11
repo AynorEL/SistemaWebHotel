@@ -1,6 +1,6 @@
 <?php
-include_once('../../../configuracion/base_datos.php');
-include_once '../../controladores/HabitacionControlador.php';
+include_once(__DIR__ . '/../../../configuracion/base_datos.php');
+include_once(__DIR__ . '/../../controladores/HabitacionControlador.php');
 
 $habitacionControlador = new HabitacionControlador();
 $habitaciones = $habitacionControlador->listarHabitaciones();
@@ -20,48 +20,93 @@ $estados_habitacion = $habitacionControlador->obtenerEstadosHabitacion();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Estilos personalizados -->
+    <style>
+        .sortable:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .modal-body {
+    max-height: 500px;
+    overflow-y: auto;
+}
+    </style>
 </head>
 <body>
 
 <div class="container mt-5">
     <h2 class="text-center">Lista de Habitaciones</h2>
+
+    <!-- Barra de búsqueda y filtros -->
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <input type="text" id="buscarHabitacion" class="form-control" placeholder="Buscar habitación...">
+        </div>
+        <div class="col-md-4">
+            <select id="filtroTipo" class="form-control">
+                <option value="">Filtrar por Tipo</option>
+                <?php foreach ($tipos_habitacion as $tipo): ?>
+                    <option value="<?= $tipo['id_tipo'] ?>"><?= $tipo['nom_tipo'] ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <select id="filtroEstado" class="form-control">
+                <option value="">Filtrar por Estado</option>
+                <?php foreach ($estados_habitacion as $estado): ?>
+                    <option value="<?= $estado['id_estado_habitacion'] ?>"><?= $estado['nombre_estado'] ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+
+    <!-- Botón para agregar nueva habitación -->
     <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalCrearHabitacion">
         <i class="fa fa-plus"></i> Agregar Habitación
     </button>
+
+    <!-- Tabla de habitaciones -->
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
-                    <th>ID</th>
-                    <th>Número</th>
+                    <th id="sortID" class="sortable">ID</th>
+                    <th id="sortNumero" class="sortable">Número</th>
                     <th>Descripción</th>
-                    <th>Tipo</th>
-                    <th>Estado</th>
+                    <th id="sortTipo" class="sortable">Tipo</th>
+                    <th id="sortEstado" class="sortable">Estado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="listaHabitaciones">
+                <!-- Aquí se cargarán dinámicamente las habitaciones -->
                 <?php while($habitacion = $habitaciones->fetch_assoc()) { ?>
                     <tr>
-                        <td><?php echo $habitacion['id_habitacion']; ?></td>
-                        <td><?php echo $habitacion['numero_habitacion']; ?></td>
-                        <td><?php echo $habitacion['descripcion']; ?></td>
-                        <td><?php echo $habitacion['tipo_habitacion']; ?></td>
-                        <td><?php echo $habitacion['estado_habitacion']; ?></td>
+                        <td><?= $habitacion['id_habitacion'] ?></td>
+                        <td><?= $habitacion['numero_habitacion'] ?></td>
+                        <td><?= $habitacion['descripcion'] ?></td>
+                        <td><?= $habitacion['tipo_habitacion'] ?></td>
+                        <td><?= $habitacion['estado_habitacion'] ?></td>
                         <td>
-                            <!-- Iconos de acciones sin funcionalidad -->
-                            <span class="btn btn-sm btn-warning">
+                            <a href="#" class="btn btn-sm btn-warning editarHabitacion" data-id="<?= $habitacion['id_habitacion'] ?>">
                                 <i class="fa fa-edit"></i>
-                            </span>
-                            <span class="btn btn-sm btn-danger">
+                            </a>
+                            <a href="#" class="btn btn-sm btn-danger eliminarHabitacion" data-id="<?= $habitacion['id_habitacion'] ?>">
                                 <i class="fa fa-trash"></i>
-                            </span>
+                            </a>
                         </td>
                     </tr>
                 <?php } ?>
             </tbody>
         </table>
     </div>
+
+    <!-- Paginación -->
+    <nav>
+        <ul class="pagination justify-content-center" id="paginacionHabitaciones">
+            <!-- Paginación generada dinámicamente -->
+        </ul>
+    </nav>
 </div>
 
 <!-- Modal Crear Habitación -->
@@ -73,62 +118,20 @@ $estados_habitacion = $habitacionControlador->obtenerEstadosHabitacion();
     </div>
 </div>
 
+<!-- Modal Actualizar Habitación -->
+<div class="modal fade" id="modalActualizarHabitacion" tabindex="-1" role="dialog" aria-labelledby="modalActualizarHabitacionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <!-- Aquí el contenido se cargará dinámicamente con AJAX -->
+        </div>
+    </div>
+</div>
 <!-- SweetAlert2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- jQuery y Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Script personalizado para el manejo de habitaciones -->
-<script>
-$(document).ready(function() {
-
-    // Evento para crear habitación
-    $('#formCrearHabitacion').submit(function(e) {
-        e.preventDefault();
-        var datos = $(this).serialize();
-        $.ajax({
-            type: 'POST',
-            url: '/SistemaWebHotel/app/controladores/HabitacionControlador.php',
-            data: datos + '&accion=crear',
-            success: function(response) {
-                response = response.trim();
-                if (response === 'exito') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: '¡Éxito!',
-                        text: 'Habitación creada correctamente.',
-                        timer: 3000,
-                        showConfirmButton: false
-                    }).then(() => {
-                        $('#modalCrearHabitacion').modal('hide');
-                        location.reload();
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Error al crear la habitación.',
-                        timer: 3000,
-                        showConfirmButton: false
-                    });
-                }
-            },
-            error: function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Error en la solicitud.',
-                    timer: 3000,
-                    showConfirmButton: false
-                });
-            }
-        });
-    });
-
-});
-</script>
-
+<script src="/SistemaWebHotel/public/js/habitacion.js"></script>
 </body>
 </html>
